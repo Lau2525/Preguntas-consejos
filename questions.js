@@ -58,8 +58,8 @@ const categories = [
 const translations = {
     es: {
         title: "Bienvenidos",
-        welcomeP1: "Estamos muy felices de compartir este día tan especial con ustedes. Sus palabras son nuestro mayor regalo.",
-        welcomeP2: "A continuación encontrarán algunas preguntas y reflexiones. Pueden ir contestando solo las que deseen. Asegúrense de <b>guardar</b> cada respuesta y al finalizar, den clic en el botón de enviar.",
+        welcomeP1: "¡Qué emoción compartir este día increíble con ustedes! Sus palabras serán de los regalos más hermosos que nos llevemos.",
+        welcomeP2: "A continuación encontrarán algunas preguntas súper divertidas y un par de reflexiones. ¡Tómense su tiempo! Contesten solo las que les nazca y diviértanse. Acuérdense de <b>guardar</b> cada respuesta y al final, ¡no olviden darle a enviar!",
         lblName: "Para empezar, por favor escribe tu nombre o el de tu familia:",
         plcName: "Ej. Familia García / Juan Pérez",
         btnStart: "Comenzar",
@@ -76,8 +76,8 @@ const translations = {
     },
     en: {
         title: "Welcome",
-        welcomeP1: "We are so happy to share this special day with you. Your words are our greatest gift.",
-        welcomeP2: "Below you will find some questions and reflections. Feel free to answer only the ones you'd like. Be sure to <b>save</b> each answer, and when you are done, click the send button.",
+        welcomeP1: "We are so thrilled to share this amazing day with you! Your words will be one of the best gifts we take home.",
+        welcomeP2: "Below you'll find some super fun questions and a few reflections. Take your time! Answer only the ones you feel like and have fun. Remember to <b>save</b> each one, and when you're done, don't forget to hit send!",
         lblName: "To begin, please write your name or your family's name:",
         plcName: "e.g., The Smith Family / John Doe",
         btnStart: "Start",
