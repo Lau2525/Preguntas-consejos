@@ -1,5 +1,15 @@
 const categories = [
     {
+        id: "metaforicas",
+        es: "Metafóricas",
+        en: "Metaphorical",
+        questions: [
+            { id: "q7", es: "Si nuestro matrimonio fuera un viaje, ¿a qué lugar del mundo creen que se parecería y por qué?", en: "If our marriage were a journey, what place in the world do you think it would resemble and why?" },
+            { id: "q8", es: "Si el amor fuera un color, ¿cuál sería el nuestro y por qué?", en: "If love were a color, what would ours be and why?" },
+            { id: "q_me3", es: "¿A qué sabe el amor?... ¿Qué sabor crees que representaría el nuestro y por qué?", en: "What does love taste like?... What flavor do you think would represent ours and why?" }
+        ]
+    },
+    {
         id: "amor",
         es: "Amor y Relación",
         en: "Love & Relationship",
@@ -31,16 +41,6 @@ const categories = [
             { id: "q_re3", es: "¿Qué aprendiste del amor con el tiempo?", en: "What have you learned about love over time?" },
             { id: "q_re4", es: "¿Qué hace especial compartir la vida con alguien?", en: "What makes sharing life with someone special?" },
             { id: "q_re5", es: "¿Qué valoras más en una relación?", en: "What do you value most in a relationship?" }
-        ]
-    },
-    {
-        id: "metaforicas",
-        es: "Metafóricas",
-        en: "Metaphorical",
-        questions: [
-            { id: "q7", es: "Si nuestro matrimonio fuera un viaje, ¿a qué lugar del mundo creen que se parecería y por qué?", en: "If our marriage were a journey, what place in the world do you think it would resemble and why?" },
-            { id: "q8", es: "Si el amor fuera un color, ¿cuál sería el nuestro y por qué?", en: "If love were a color, what would ours be and why?" },
-            { id: "q_me3", es: "¿A qué sabe el amor?... ¿Qué sabor crees que representaría el nuestro y por qué?", en: "What does love taste like?... What flavor do you think would represent ours and why?" }
         ]
     },
     {
