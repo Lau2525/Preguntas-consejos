@@ -321,6 +321,48 @@ button {
     gap: 1rem;
 }
 
+/* Multiple choice styles */
+.multiple-choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(207, 164, 97, 0.1);
+}
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.radio-group-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+}
+.radio-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-style: normal;
+    color: var(--text-secondary);
+}
+.radio-label input[type="radio"] {
+    accent-color: var(--accent);
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
 .btn-save-wrap {
     display: flex;
     justify-content: flex-end;

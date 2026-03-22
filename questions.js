@@ -6,7 +6,20 @@ const categories = [
         questions: [
             { id: "q7", es: "Si nuestro matrimonio fuera un viaje, ¿a qué lugar del mundo creen que se parecería y por qué?", en: "If our marriage were a journey, what place in the world do you think it would resemble and why?" },
             { id: "q8", es: "Si el amor fuera un color, ¿cuál sería el nuestro y por qué?", en: "If love were a color, what would ours be and why?" },
-            { id: "q_me3", es: "¿A qué sabe el amor?... ¿Qué sabor crees que representaría el nuestro y por qué?", en: "What does love taste like?... What flavor do you think would represent ours and why?" }
+            { id: "q_me3", es: "¿A qué sabe el amor?... ¿Qué sabor crees que representaría el nuestro y por qué?", en: "What does love taste like?... What flavor do you think would represent ours and why?" },
+            { 
+                id: "q_hijos", 
+                type: "multiple",
+                es: "Si tuviéramos hijos... ¿Cómo crees que serían?", 
+                en: "If we had children... What do you think they would be like?",
+                groups: [
+                    { id: "parecido", es: "1. Se parecerán más a:", en: "1. They will look more like:", options: [ {es: "Mamá", en: "Mom"}, {es: "Papá", en: "Dad"}, {es: "Mezcla", en: "Mix"} ] },
+                    { id: "ojos", es: "2. Ojos:", en: "2. Eyes:", options: [ {es: "Claros", en: "Light"}, {es: "Miel", en: "Hazel"}, {es: "Oscuros", en: "Dark"} ] },
+                    { id: "piel", es: "3. Piel:", en: "3. Skin tone:", options: [ {es: "Clara", en: "Light"}, {es: "Intermedia", en: "Medium"}, {es: "Morena", en: "Dark"} ] },
+                    { id: "cabello", es: "4. Cabello:", en: "4. Hair color:", options: [ {es: "Claro", en: "Light"}, {es: "Castaño", en: "Brown"}, {es: "Oscuro", en: "Dark"} ] },
+                    { id: "textura", es: "5. Textura:", en: "5. Texture:", options: [ {es: "Lacio", en: "Straight"}, {es: "Ondulado", en: "Wavy"}, {es: "Rizado", en: "Curly"} ] }
+                ]
+            }
         ]
     },
     {

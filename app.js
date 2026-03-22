@@ -147,22 +147,69 @@ function renderQuestions() {
             const ansWrapper = document.createElement('div');
             ansWrapper.className = 'answer-wrapper';
 
-            const textarea = document.createElement('textarea');
-            textarea.id = `input-${q.id}`;
-            textarea.placeholder = t.plcAnswer;
-            // Si ya hay algo guardado, rellenarlo
-            if (savedAnswers[q.id]) {
-                textarea.value = savedAnswers[q.id];
-            } else {
-                textarea.value = ''; // limpiar estado previo por re-renderizado
-            }
+            let textarea = null;
 
-            textarea.addEventListener('input', () => {
-                isDirty = true;
-                const btnSave = document.getElementById(`btn-save-${q.id}`);
-                btnSave.innerText = btnSave.dataset.originalText;
-                btnSave.classList.remove('saved');
-            });
+            if (q.type === 'multiple') {
+                const multiContainer = document.createElement('div');
+                multiContainer.className = 'multiple-choice-container';
+                
+                q.groups.forEach(group => {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'radio-group';
+                    const groupLabel = document.createElement('span');
+                    groupLabel.className = 'radio-group-label';
+                    groupLabel.innerText = group[currentLang];
+                    groupDiv.appendChild(groupLabel);
+                    
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'radio-options';
+                    
+                    group.options.forEach(opt => {
+                        const optLabel = document.createElement('label');
+                        optLabel.className = 'radio-label';
+                        
+                        const input = document.createElement('input');
+                        input.type = 'radio';
+                        input.name = `multi-${q.id}-${group.id}`;
+                        input.value = opt.es;
+                        
+                        if (savedAnswers[q.id] && savedAnswers[q.id][group.id] === opt.es) {
+                            input.checked = true;
+                        }
+                        
+                        input.addEventListener('change', () => {
+                            isDirty = true;
+                            const btnSave = document.getElementById(`btn-save-${q.id}`);
+                            btnSave.innerText = btnSave.dataset.originalText;
+                            btnSave.classList.remove('saved');
+                        });
+                        
+                        optLabel.appendChild(input);
+                        optLabel.appendChild(document.createTextNode(' ' + opt[currentLang]));
+                        optionsDiv.appendChild(optLabel);
+                    });
+                    groupDiv.appendChild(optionsDiv);
+                    multiContainer.appendChild(groupDiv);
+                });
+                ansWrapper.appendChild(multiContainer);
+            } else {
+                textarea = document.createElement('textarea');
+                textarea.id = `input-${q.id}`;
+                textarea.placeholder = t.plcAnswer;
+                if(savedAnswers[q.id] && typeof savedAnswers[q.id] === 'string') {
+                    textarea.value = savedAnswers[q.id];
+                } else {
+                    textarea.value = ''; 
+                }
+                
+                textarea.addEventListener('input', () => {
+                    isDirty = true;
+                    const btnSave = document.getElementById(`btn-save-${q.id}`);
+                    btnSave.innerText = btnSave.dataset.originalText;
+                    btnSave.classList.remove('saved');
+                });
+                ansWrapper.appendChild(textarea);
+            }
 
             const btnSaveWrap = document.createElement('div');
             btnSaveWrap.className = 'btn-save-wrap';
@@ -172,22 +219,39 @@ function renderQuestions() {
             btnSave.id = `btn-save-${q.id}`;
             btnSave.dataset.originalText = t.btnSave;
             btnSave.innerText = savedAnswers[q.id] ? t.btnSaved : t.btnSave;
-            if (savedAnswers[q.id]) {
+            if(savedAnswers[q.id]) {
                 btnSave.classList.add('saved');
             }
 
             btnSave.addEventListener('click', () => {
-                const val = textarea.value.trim();
-                if (val) {
-                    savedAnswers[q.id] = val;
-                    btnSave.innerText = t.btnSaved;
-                    btnSave.classList.add('saved');
-                    isDirty = false;
+                if (q.type === 'multiple') {
+                    let hasSelection = false;
+                    let result = {};
+                    q.groups.forEach(g => {
+                        const selected = document.querySelector(`input[name="multi-${q.id}-${g.id}"]:checked`);
+                        if (selected) {
+                            result[g.id] = selected.value;
+                            hasSelection = true;
+                        }
+                    });
+                    if (hasSelection) {
+                        savedAnswers[q.id] = result;
+                        btnSave.innerText = t.btnSaved;
+                        btnSave.classList.add('saved');
+                        isDirty = false;
+                    }
+                } else {
+                    const val = textarea.value.trim();
+                    if(val) {
+                        savedAnswers[q.id] = val;
+                        btnSave.innerText = t.btnSaved;
+                        btnSave.classList.add('saved');
+                        isDirty = false;
+                    }
                 }
             });
 
             btnSaveWrap.appendChild(btnSave);
-            ansWrapper.appendChild(textarea);
             ansWrapper.appendChild(btnSaveWrap);
 
             qCard.appendChild(qText);
@@ -203,12 +267,25 @@ function renderQuestions() {
 function handleSubmit() {
     const t = translations[currentLang];
 
-    // Forzamos guardar aquellas cajas que tengan texto pero el usuario no haya dado "Guardar"
+    // Forzamos guardar aquellas cajas que tengan algo seleccionado o escrito pero que no se hayan guardado explícitamente
     categories.forEach(cat => {
         cat.questions.forEach(q => {
-            const textarea = document.getElementById(`input-${q.id}`);
-            if (textarea && textarea.value.trim().length > 0) {
-                savedAnswers[q.id] = textarea.value.trim();
+            if (q.type === 'multiple') {
+                let hasSelection = false;
+                let result = {};
+                q.groups.forEach(g => {
+                    const selected = document.querySelector(`input[name="multi-${q.id}-${g.id}"]:checked`);
+                    if (selected) {
+                        result[g.id] = selected.value;
+                        hasSelection = true;
+                    }
+                });
+                if (hasSelection) savedAnswers[q.id] = result;
+            } else {
+                const textarea = document.getElementById(`input-${q.id}`);
+                if (textarea && textarea.value.trim().length > 0) {
+                    savedAnswers[q.id] = textarea.value.trim();
+                }
             }
         });
     });
@@ -230,7 +307,19 @@ function handleSubmit() {
             if (savedAnswers[q.id]) {
                 catHasAnswers = true;
                 catText += `P: ${q.es}\n`;
-                catText += `R: ${savedAnswers[q.id]}\n\n`;
+                
+                if (typeof savedAnswers[q.id] === 'string') {
+                    catText += `R: ${savedAnswers[q.id]}\n\n`;
+                } else {
+                    // Multiple choice formatting
+                    let mcAns = [];
+                    q.groups.forEach(g => {
+                        if (savedAnswers[q.id][g.id]) {
+                            mcAns.push(`  - ${g.es} ${savedAnswers[q.id][g.id]}`);
+                        }
+                    });
+                    catText += `R:\n${mcAns.join('\n')}\n\n`;
+                }
             }
         });
 
