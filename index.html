@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas y Consejos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1 class="logo">L <span class="amp">&amp;</span> M</h1>
+            <div class="lang-switcher">
+                <button id="btn-es" class="lang-btn active">Español</button>
+                <button id="btn-en" class="lang-btn">English</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <!-- Welcome Section -->
+        <section id="welcome-section" class="welcome-section glass card slide-up">
+            <header class="header">
+                <h2 id="main-title" class="title playfair">Bienvenidos</h2>
+                <div class="welcome-text">
+                    <p id="welcome-p1">Estamos muy felices de compartir este día tan especial con ustedes. Sus palabras son nuestro mayor regalo.</p>
+                    <p id="welcome-p2">A continuación encontrarán algunas preguntas y reflexiones. Pueden ir contestando solo las que deseen. Asegúrense de <b>guardar</b> cada respuesta y al finalizar, den clic en el botón de enviar.</p>
+                </div>
+            </header>
+
+            <div class="input-group">
+                <label for="guest-name" id="label-name">Para empezar, por favor escribe tu nombre o el de tu familia:</label>
+                <input type="text" id="guest-name" placeholder="Ej. Familia García / Juan Pérez" autocomplete="off">
+            </div>
+            
+            <button id="btn-start" class="btn-primary" disabled>
+                <span id="text-start">Comenzar</span>
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+        </section>
+
+        <!-- Questions Section (Hidden initially) -->
+        <section id="questions-section" class="hidden slide-up">
+            <div class="user-greeting glass card">
+                <p id="greeting-text" class="playfair">¡Hola, <span id="display-name" class="highlight-name"></span>!</p>
+                <p id="greeting-sub" class="subtitle">Selecciona los temas y responde las preguntas que gustes.</p>
+            </div>
+
+            <div id="questions-container">
+                <!-- Dynamically inserted -->
+            </div>
+
+            <section class="form-actions glass card">
+                <button id="btn-submit" class="btn-primary">
+                    <span id="text-submit">Enviar todas mis respuestas</span>
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </button>
+            </section>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="success-modal" class="modal hidden">
+        <div class="modal-content glass slide-up">
+            <h3 id="modal-title" class="playfair modal-title">¡Gracias!</h3>
+            <p id="modal-desc">Tus respuestas han sido preparadas. Se abrirá tu aplicación de correo para enviarlas.</p>
+            <button id="btn-close-modal" class="btn-secondary">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
